@@ -5,8 +5,6 @@ This repos is a Powershell library to handle data modeling focusing on cloud pro
 ## Initial Tools - Filter methods
 Model initial tools WorkFlow - [WorkFlow_Main01.PS1](https://github.com/lorthe/PowerShell/blob/61b1070bddde2238075b0d550ecde1a382b2fcd3/WorkFlow_Main01.PS1)
 
-
-
 ```bash
 # FILTER METHODS MODULES Office365
 
@@ -30,10 +28,6 @@ Current method of Authentication in Office365 modules using text file password e
 
 
 ```bash
-# 
-# 
-# Bruno Gomes | DOMO Solucoes em T.I.
-####
 Set-ExecutionPolicy RemoteSigned
 Import-Module ActiveDirectory
 Import-Module -Name AzureAD, MSOnline, ExchangeOnline
@@ -50,13 +44,10 @@ Connect-AzureAD -Credential $Cred
 Connect-MsolService -Credential $Cred
 Connect-ExchangeOnline -Credential $Cred
 
-
-
 #######
 #Script complete
 Write-Host "Script Execution - OK"
 #
-
 ```
 
 ## Contributing
