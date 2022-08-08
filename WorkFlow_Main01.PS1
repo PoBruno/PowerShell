@@ -4,7 +4,7 @@
 ####
 Set-ExecutionPolicy RemoteSigned
 Import-Module ActiveDirectory
-Import-Module -Name AzureAD, MSOnline, ExchangeOnlineManagement
+Import-Module -Name AzureAD, MSOnline, ExchangeOnlineManagement -UseWindowsPowerShell
 
 Connect-AzureAD 
 Connect-MSOlService
