@@ -30,7 +30,7 @@ Current method of Authentication in Office365 modules using text file password e
 ```bash
 Set-ExecutionPolicy RemoteSigned
 Import-Module ActiveDirectory
-Import-Module -Name AzureAD, MSOnline, ExchangeOnlineManagement
+Import-Module -Name AzureAD, MSOnline, ExchangeOnlineManagement -UseWindowsPowerShell
 
 ## Methods to save credential password in a text file
 $User = "MyUser"
