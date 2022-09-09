@@ -7,12 +7,9 @@ This repos is a Powershell library to handle data modeling focusing on cloud pro
 
 ```bash
 # Create a shared mailbox
-
 New-Mailbox -Shared -Name "Automate.List" -PrimarySmtpAddress "automate.list@backsys.tech"
-
 ```
 ![](https://github.com/BrunoPolezaGomes/PowerShell/blob/main/Shared_MailBox_Automate_Delegate_User/Images/Shared_Mailbox_Created.png?raw=true)
-
 # 
 
 ### Filter users by custom attribute and apply full access in shared box
@@ -32,18 +29,15 @@ Bruno Gomes   bruno@monga.tech   Automate.List
 # 
 
 ### Create loop to apply full access user in SharedBox
-
 ```bash
 ForEach ($User in $Users) {
     Add-MailboxPermission -Identity "Automate.List" -User $User.UserPrincipalName -AccessRights FullAccess -InheritanceType All
 }
 ```
 ![](https://github.com/BrunoPolezaGomes/PowerShell/blob/main/Shared_MailBox_Automate_Delegate_User/Images/Shared_Mailbox_Users.png?raw=true)
+# 
 
-
-## 
 ### Connection Exchange method
-
 first we will create a file with the encrypted password to use in the script to connect to Exchange Online, to suppress the password in the script
 
 ```bash
@@ -66,9 +60,9 @@ $Credential = New-Object -TypeName System.Management.Automation.PSCredential -Ar
 #Connect Exchange Online
 Connect-ExchangeOnline -Credential $Cred
 ```
+# 
 
-## Complete workflow
-
+### Complete workflow
 ```bash
 #Credentials
 $User = "MyUser"
