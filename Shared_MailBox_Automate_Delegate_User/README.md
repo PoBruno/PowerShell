@@ -1,5 +1,5 @@
 
-######This repos is a Powershell library to handle data modeling focusing on cloud providers.
+This repos is a Powershell library to handle data modeling focusing on cloud providers.
 # Automate delegate full access in shared mailbox
 
 
