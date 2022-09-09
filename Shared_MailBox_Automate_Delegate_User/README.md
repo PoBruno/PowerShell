@@ -1,6 +1,6 @@
 
 ######This repos is a Powershell library to handle data modeling focusing on cloud providers.
-# Automate delegate user in shared mailbox
+# Automate delegate full access in shared mailbox
 
 
 ###Create mailbox
@@ -15,7 +15,7 @@ New-Mailbox -Shared -Name "Automate.List" -PrimarySmtpAddress "automate.list@bac
 
 # 
 
-### Filter users by custom attribute and insert into shared box
+### Filter users by custom attribute and apply full access in shared box
 ```bash
 $Users = Get-Mailbox -Filter { CustomAttribute1 -Like "Automate.List" }
 $Users  | Select-Object DisplayName, UserPrincipalName, CustomAttribute1
@@ -29,11 +29,63 @@ João Wilke    joao@backsys.tech  Automate.List
 Bruno Gomes   bruno@monga.tech   Automate.List
 
 ```
+# 
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+### Create loop to apply full access user in SharedBox
 
-Please make sure to update tests as appropriate.
+```
+ForEach ($User in $Users) {
+    Add-MailboxPermission -Identity "Automate.List" -User $User.UserPrincipalName -AccessRights FullAccess -InheritanceType All
+}
+```
+![](https://github.com/BrunoPolezaGomes/PowerShell/blob/main/Shared_MailBox_Automate_Delegate_User/Images/Shared_Mailbox_Users.png?raw=true)
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+## 
+### Connection Exchange method
+
+first we will create a file with the encrypted password to use in the script to connect to Exchange Online, to suppress the password in the script
+
+```
+#Insert admin account
+$User = "MyUser"
+$FilePass = "C:\Passwd\name@domain.txt"
+#Encrypted password to a file
+$PassCreate = "Password!" | ConvertTo-SecureString -AsPlainText -Force
+$PassCreate | ConvertFrom-SecureString | Out-File $FilePass
+
+
+```
+
+With the password encrypted in a file, we will use the file to insert it into a variable and make the connection
+
+```bash
+#Get encrypted password file
+$Password = Get-Content 'C:\Passwd\name@domain.txt' | ConvertTo-SecureString
+#Get credentials for variable
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Password
+
+#Connect Exchange Online
+Connect-ExchangeOnline -Credential $Cred
+
+```
+
+## Complete workflow
+
+```bash
+#Credentials
+$User = "MyUser"
+$Password = Get-Content 'C:\Passwd\name@domain.txt' | ConvertTo-SecureString
+$Credential = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $User, $Password
+#Connect Exchange Online
+Connect-ExchangeOnline -Credential $Cred
+#New-Mailbox -Shared -Name "Automate.List" -PrimarySmtpAddress "automate.list@backsys.tech"
+
+#Filter users by custom attribute and apply full access in shared box
+$Users = Get-Mailbox -Filter {CustomAttribute1 -Like "Automate.List"}
+#Create loop to apply full access user in SharedBox
+ForEach ($User in $Users) {
+    Add-MailboxPermission -Identity "Automate.List" -User $User.UserPrincipalName -AccessRights FullAccess -InheritanceType All
+}
+
+```
