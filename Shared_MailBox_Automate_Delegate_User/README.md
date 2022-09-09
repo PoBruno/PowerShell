@@ -3,7 +3,7 @@ This repos is a Powershell library to handle data modeling focusing on cloud pro
 # Automate delegate full access in shared mailbox
 
 
-###Create mailbox
+##Create mailbox
 
 ```bash
 # Create a shared mailbox
