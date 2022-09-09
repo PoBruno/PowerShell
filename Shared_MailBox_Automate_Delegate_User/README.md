@@ -11,7 +11,7 @@
 New-Mailbox -Shared -Name "Automate.List" -PrimarySmtpAddress "automate.list@backsys.tech"
 
 ```
-![](https://raw.githubusercontent.com/BrunoPolezaGomes/PowerShell/main/Shared_MailBox_Automate_Delegate_User/Images/Shared_Mailbox_Created.png?token=GHSAT0AAAAAABYTDC5NJULN3MVY7L3ODITKYY3WMNA)
+![](https://github.com/BrunoPolezaGomes/PowerShell/blob/main/Shared_MailBox_Automate_Delegate_User/Images/Shared_Mailbox_Created.png?raw=true)
 
 # 
 
