@@ -33,7 +33,7 @@ Bruno Gomes   bruno@monga.tech   Automate.List
 
 ### Create loop to apply full access user in SharedBox
 
-```
+```bash
 ForEach ($User in $Users) {
     Add-MailboxPermission -Identity "Automate.List" -User $User.UserPrincipalName -AccessRights FullAccess -InheritanceType All
 }
@@ -46,15 +46,13 @@ ForEach ($User in $Users) {
 
 first we will create a file with the encrypted password to use in the script to connect to Exchange Online, to suppress the password in the script
 
-```
+```bash
 #Insert admin account
 $User = "MyUser"
 $FilePass = "C:\Passwd\name@domain.txt"
 #Encrypted password to a file
 $PassCreate = "Password!" | ConvertTo-SecureString -AsPlainText -Force
 $PassCreate | ConvertFrom-SecureString | Out-File $FilePass
-
-
 ```
 
 With the password encrypted in a file, we will use the file to insert it into a variable and make the connection
@@ -67,7 +65,6 @@ $Credential = New-Object -TypeName System.Management.Automation.PSCredential -Ar
 
 #Connect Exchange Online
 Connect-ExchangeOnline -Credential $Cred
-
 ```
 
 ## Complete workflow
@@ -87,5 +84,4 @@ $Users = Get-Mailbox -Filter {CustomAttribute1 -Like "Automate.List"}
 ForEach ($User in $Users) {
     Add-MailboxPermission -Identity "Automate.List" -User $User.UserPrincipalName -AccessRights FullAccess -InheritanceType All
 }
-
 ```
